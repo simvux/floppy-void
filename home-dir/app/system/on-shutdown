@@ -1,0 +1,13 @@
+#!/bin/env zsh
+
+# This script gets ran at system shutdown, triggered by `/etc/rc.shutdown`
+
+echo "Cleaning out old downloads directory"
+cd /home/simon/app/system/old-download-directories
+# Shift all old entries
+rm -rf '3'
+mv '2' '3'
+mv '1' '2'
+# Move everything in down to new entry
+mkdir '1'
+mv /home/simon/down/* '1/'

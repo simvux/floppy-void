@@ -1,0 +1,6 @@
+Tarrasch/zsh-bd
+hlissner/zsh-autopair
+softmoth/zsh-vim-mode
+zsh-users/zsh-completions
+zsh-users/zsh-syntax-highlighting
+bilelmoussaoui/flatpak-zsh-completion

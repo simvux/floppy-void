@@ -1,0 +1,22 @@
+# This isn't a script but a set of instructions. 
+
+edit /etc/default/efibootmgr-kernel-hook, for example
+```
+MODIFY_EFI_ENTRIES=1
+OPTIONS="root=/dev/nvme0n1p2 loglevel=4"
+DISK="/dev/nvme0n1"
+PART=1
+```
+
+edit /etc/kernel.d/post-install/50-efibootmgr to fix incompatible UEFI implementations
+```
+# Hack for supporting stricter UEFI's which require '.efi' extension
+rm /boot/vmlinuz-latest.efi
+cp /boot/vmlinuz-${VERSION} /boot/vmlinuz-latest.efi
+```
+
+it should look something like
+Boot0000* Void Linux with kernel 6.6	HD(1,GPT,4fb11553-a5e1-754f-a7a8-381d7b69c8f6,0x800,0x200000)/\vmlinuz-latest.efiroot=/dev/nvme0n1p2 loglevel=4 initrd=/initramfs-6.6.62_1.img
+
+if initramfs/vmlinuz refuses to generate, `xi -f linux6.6` instead of `xbps-reconfigure -f linux6.6`
+latter runs efibootmgr hooks

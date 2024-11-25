@@ -1,0 +1,2 @@
+#!/bin/env sh
+grim -g "$(slurp && sleep 2s)" - | wl-copy

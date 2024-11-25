@@ -1,0 +1,2 @@
+#!/bin/env bash
+unipicker | wl-copy -n

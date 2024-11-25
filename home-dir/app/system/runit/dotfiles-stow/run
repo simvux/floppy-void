@@ -1,0 +1,4 @@
+#!/bin/env bash
+cd ../../../../../dotfiles-stow/
+stow -t $HOME/ .
+sleep 10s
