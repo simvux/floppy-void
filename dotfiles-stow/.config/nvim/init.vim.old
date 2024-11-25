@@ -2,7 +2,8 @@
 " colorscheme vim
 " hi Visual ctermfg=none ctermbg=242
 
-:lua require('plugins')
+" :lua require('plugins')
+:lua require('config.lazy')
 
 " No side-bar
 set scl=no

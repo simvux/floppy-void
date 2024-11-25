@@ -1,30 +1,15 @@
-local use = require('packer').use
-
-require('packer').startup(function()
-  use 'wbthomason/packer.nvim' -- Package manager
-  use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
-  use 'itchyny/lightline.vim' -- Statusbar
-  use 'is0n/fm-nvim' -- Use ranger as file browser
-  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-  use "windwp/nvim-autopairs"
-  use 'L3MON4D3/LuaSnip'
-  use 'saadparwaiz1/cmp_luasnip'
-  use 'lambdalisue/suda.vim'
-  use 'elkowar/yuck.vim'
-end)
-
--- require('nvim-autopairs').setup {}
-local autopairs = require("nvim-autopairs")
+local autopairs = require('nvim-autopairs')
 autopairs.setup {
-    check_ts = true,
-    ts_config = {}
+     check_ts = true,
+     ts_config = {}
 }
 local Rule = require("nvim-autopairs.rule")
 local cond = require("nvim-autopairs.conds")
 autopairs.add_rules {
   Rule("<", ">"):with_pair(cond.before_regex("%a+")):with_move(function(opts) return opts.char == ">" end),
 }
+
+require('lualine').setup()
 
 require('lspconfig')['rust_analyzer'].setup{
     flags = lsp_flags,
@@ -42,9 +27,6 @@ for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
 end
 
 require('lspconfig')['pyright'].setup{
-    flags = lsp_flags,
-}
-require('lspconfig')['tsserver'].setup{
     flags = lsp_flags,
 }
 require'lspconfig'.gopls.setup{}
