@@ -21,5 +21,5 @@ xbps-install -y -Su zsh pipewire wireplumber bluez ImageMagick MangoHud NetworkM
     qpwgraph qt6-wayland qt5-wayland radeontop ranger rtkit rustup slurp socklog-void socklog \
     source-sans-pro steam svt-av1 terminus-font termsyn-font tokei tmux zellij tree udiskie \
     ttf-ubuntu-font-family unison unrar vulkan-loader vulkan-loader-32bit wayland-protocols mako \
-    wf-recorder wf-shell wget wine whois wl-clipboard wofi xdg-desktop-portal-gtk xev xtools \
+    wf-recorder wf-shell wget wine whois wl-clipboard wofi xdg-desktop-portal-gtk xev xtools grim \
     xdg-desktop-portal-wlr hyprland hyprpaper hyprland-protocols hyprutils fzf qt5ct qt6ct kvantum
