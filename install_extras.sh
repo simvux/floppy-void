@@ -1,5 +1,5 @@
 #!/bin/env bash
-set -e
+set -x
 
 USERNAME=$1
 if [ -z "$USERNAME" ]; then
