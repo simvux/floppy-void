@@ -19,7 +19,8 @@ local mono6 = "#ff4dff"
 local blue = "#8000ff"
 local red  = "#ff0080"
 
--- fe wafklwah klfj aaef aewf
+-- This is a comment
+
 local theme = lush(function() 
   return {
     Normal { fg = weak_foreground },
@@ -29,6 +30,8 @@ local theme = lush(function()
     Identifier { fg = mono1 },
     Statement { fg = mono4 },
     Todo { bg = blue },
+    Special { fg = blue },
+    Function { fg = mono3 }
   }
 end)
 

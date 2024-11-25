@@ -1,3 +1,5 @@
+-- https://github.com/nanotee/nvim-lua-guide/
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -56,6 +58,46 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
+-- Common options
 vim.cmd 'colorscheme purple_theme'
+vim.api.nvim_set_option('scrolloff', 10)
+vim.api.nvim_set_option('cmdheight', 0)
+vim.api.nvim_set_option('spelllang', 'en')
+vim.api.nvim_set_option('autochdir', true)
+vim.wo.wrap = false
+-- Double tap esc to de-highlight
+vim.api.nvim_set_keymap('n', '<esc><esc>', ':silent! nohls | ccl<cr>', { noremap = true })
+-- Save on spacebar
+vim.api.nvim_set_keymap('n', '<Space>', ':w<CR>', {})
+vim.api.nvim_create_autocmd('VimResized', {
+    callback = function() vim.cmd("wincmd =") end,
+})
+vim.api.nvim_create_autocmd({'BufWinEnter'}, {
+  desc = 'return cursor to where it was last time closing the file',
+  pattern = '*',
+  command = 'silent! normal! g`"zv',
+})
+vim.bo.tabstop = 4
+vim.bo.shiftwidth = 4
+vim.bo.expandtab = true
+vim.noshowmode = true
+-- Switch panes with ctrl
+vim.api.nvim_set_keymap('n', '<C-J>', '<C-W><C-J>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-K>', '<C-W><C-K>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-L>', '<C-W><C-L>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-H>', '<C-W><C-H>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'm', ':Ranger<CR>', { noremap = true })
+-- Solve auto-pair conflicts with Alt-Gr keyboards by unbinding everything
+vim.cmd('let g:AutoPairsShorcutToggle = ""')
+vim.cmd('let g:AutoPairsFastWrap = ""')
+vim.cmd('let g:AutoPairsShortcutJump = ""')
+vim.cmd('let g:AutoPairsAutoParisShortcutBackInsert = ""')
+
+-- Prevent misinputs from EN -> Nordic keyboard mapping with Super being <>| (hack)
+vim.api.nvim_set_keymap('i', 'D-\'', '\'', {})
+vim.api.nvim_set_keymap('i', 'D-Bar', '', {})
+vim.api.nvim_set_keymap('i', 'D-.', '', {})
+vim.api.nvim_set_keymap('i', 'D-k', '', {})
+vim.api.nvim_set_keymap('i', 'S-D-Space', '', {})
 
 require("plugins")
