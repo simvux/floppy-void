@@ -1,7 +1,13 @@
-PROMPT="%F{11} :: %F{11}%20d%u%F{4} > %F{11}"
+PROMPT=" %F{2}∀ %F{3}%20d%u%F{4} > %F{2}"
+
+# Everything initializes too quickly and Hyprland reports the incorrect window size 
+# leading to an artifact. 
+sleep 0.05s
 
 autoload -Uz compinit
 compinit
+
+# unsetopt PROMPT_SP
 
 if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
     export XKB_DEFAULT_LAYOUT=se
@@ -22,12 +28,12 @@ export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 export PATH=/home/simon/.cargo/bin:/home/simon/.local/bin:$NPM_PACKAGES/bin:$GOPATH/bin:$PATH
 
 # Vim-Mode plugin cursor switching
-MODE_CURSOR_VIINS="#30c0a5 blinking bar"
+MODE_CURSOR_VIINS="#ff89ff blinking bar"
 MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff0000"
 MODE_CURSOR_VICMD="green block"
-MODE_CURSOR_SEARCH="#30c0a5 steady underline"
+MODE_CURSOR_SEARCH="#ff89ff steady underline"
 MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
-MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #30c0a5"
+MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #ff89ff"
 KEYTIMEOUT=1
 
 # Less colors
