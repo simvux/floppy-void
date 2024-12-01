@@ -23,7 +23,8 @@ white = "#ff4d44"
 yellow = "#ff89ff"
 
 [colors.primary]
-background = "#0a0d11"
+# background = "#0a0d11"
+background = "#0f1216"
 foreground = "#ffabff"
 
 [colors.selection]
@@ -178,6 +179,9 @@ title = "Alacritty"
 [window.class]
 general = "Alacritty"
 instance = "Alacritty"
+
+[scrolling]
+history = 100000
 
 [window.padding]
 x = 4
