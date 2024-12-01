@@ -31,7 +31,9 @@ local theme = lush(function()
     Statement { fg = mono4 },
     Todo { bg = blue },
     Special { fg = blue },
-    Function { fg = mono3 }
+    ErrorMsg { fg = red },
+    Function { fg = mono3 },
+    DiagnosticError { fg = red }
   }
 end)
 

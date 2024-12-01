@@ -9,7 +9,32 @@ autopairs.add_rules {
   Rule("<", ">"):with_pair(cond.before_regex("%a+")):with_move(function(opts) return opts.char == ">" end),
 }
 
-require('lualine').setup()
+local lualine_purple_theme = {
+  normal = {
+    a = { fg = "#000000", bg = "#cc00cc", gui = 'bold' },
+    b = { fg = "#000000", bg = "#b300b3" },
+    c = { fg = "#ff1aff", bg = "#0f1216" },
+  },
+  insert = { a = { fg = "#ffabff", bg = "#8000ff", gui = 'bold' } },
+  visual = { a = { fg = "#ffffff", bg = "#aaaaaa", gui = 'bold' } },
+  replace = { a = { fg = "#ffffff", bg = "#0a0d11", gui = 'bold' } },
+  inactive = {
+    a = { fg = "#000000", bg = "#cc00cc", gui = 'bold' },
+    b = { fg = "#000000", bg = "#b300b3" },
+    c = { fg = "#b300b3", bg = "#0f1216" },
+  },
+}
+require('lualine').setup {
+    options = {
+	icons_enabled = false,
+	theme = lualine_purple_theme,
+    },
+    sections = {
+	lualine_b = {},
+	lualine_c = {{'filename', path = 3}},
+	lualine_x = {'diagnostics', 'filetype'},
+    }
+}
 
 require('lspconfig')['rust_analyzer'].setup{
     flags = lsp_flags,
@@ -133,15 +158,14 @@ luasnip.add_snippets("rust", {
 
 vim.diagnostic.config({
     virtual_text = true,
-    signs = true,
+    signs = false,
     update_in_insert = false,
-    underline = true,
+    underline = false,
     severity_sort = true,
     float = {
-        border = 'single',
-        source = 'always',
-        header = '',
-        prefix = '',
+	scope = 'line',
+	serverity = { min = 'Error' },
+	border = 'single',
     },
 })
 
