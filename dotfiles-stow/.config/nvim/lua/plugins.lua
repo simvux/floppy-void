@@ -9,31 +9,71 @@ autopairs.add_rules {
   Rule("<", ">"):with_pair(cond.before_regex("%a+")):with_move(function(opts) return opts.char == ">" end),
 }
 
-local lualine_purple_theme = {
-  normal = {
-    a = { fg = "#000000", bg = "#cc00cc", gui = 'bold' },
-    b = { fg = "#000000", bg = "#b300b3" },
-    c = { fg = "#ff1aff", bg = "#0f1216" },
-  },
-  insert = { a = { fg = "#ffabff", bg = "#8000ff", gui = 'bold' } },
-  visual = { a = { fg = "#ffffff", bg = "#aaaaaa", gui = 'bold' } },
-  replace = { a = { fg = "#ffffff", bg = "#0a0d11", gui = 'bold' } },
-  inactive = {
-    a = { fg = "#000000", bg = "#cc00cc", gui = 'bold' },
-    b = { fg = "#000000", bg = "#b300b3" },
-    c = { fg = "#b300b3", bg = "#0f1216" },
-  },
-}
-require('lualine').setup {
-    options = {
-	icons_enabled = false,
-	theme = lualine_purple_theme,
-    },
-    sections = {
-	lualine_b = {},
-	lualine_c = {{'filename', path = 3}},
-	lualine_x = {'diagnostics', 'filetype'},
+function load_lualine(theme)
+    require('lualine').setup {
+        options = {
+            icons_enabled = false,
+            theme = theme,
+        },
+        sections = {
+        lualine_b = {},
+        lualine_c = {{'filename', path = 3}},
+        lualine_x = {'diagnostics', 'filetype'},
+        }
     }
+end
+
+function load_lualine_by_name(theme)
+    local lualine_purple_theme = {
+      normal = {
+        a = { fg = "#000000", bg = "#cc00cc", gui = 'bold' },
+        b = { fg = "#000000", bg = "#b300b3" },
+        c = { fg = "#ff1aff", bg = "#0f1216" },
+      },
+      insert = { a = { fg = "#ffabff", bg = "#8000ff", gui = 'bold' } },
+      visual = { a = { fg = "#ffffff", bg = "#aaaaaa", gui = 'bold' } },
+      replace = { a = { fg = "#ffffff", bg = "#0a0d11", gui = 'bold' } },
+      inactive = {
+        a = { fg = "#000000", bg = "#cc00cc", gui = 'bold' },
+        b = { fg = "#000000", bg = "#b300b3" },
+        c = { fg = "#b300b3", bg = "#0f1216" },
+      },
+    }
+
+    local lualine_cyan_theme = {
+      normal = {
+        a = { fg = "#000000", bg = "#00afc5", gui = 'bold' },
+        b = { fg = "#000000", bg = "#0098ac" },
+        c = { fg = "#00c5df", bg = "#212734" },
+      },
+      insert = { a = { fg = "#000000", bg = "#3e7ec9", gui = 'bold' } },
+      visual = { a = { fg = "#000000", bg = "#7e7ada", gui = 'bold' } },
+      replace = { a = { fg = "#000000", bg = "#7e7ada", gui = 'bold' } },
+      inactive = {
+        a = { fg = "#000000", bg = "#212734", gui = 'bold' },
+        b = { fg = "#000000", bg = "#b300b3" },
+        c = { fg = "#54a1ff", bg = "#212734" },
+      },
+    }
+
+    if theme == "purple_theme" then
+        load_lualine(lualine_purple_theme);
+    end
+    if theme == "cyan_theme" then
+        load_lualine(lualine_cyan_theme);
+    end
+end
+
+local _ = load_lualine_by_name('cyan_theme');
+
+require('nvim-treesitter.configs').setup {
+  ensure_installed = { "lua", "rust", "toml" },
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting=false,
+  },
+  ident = { enable = true }, 
 }
 
 require('lspconfig')['rust_analyzer'].setup{
@@ -51,6 +91,8 @@ for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
   vim.api.nvim_set_hl(0, group, {})
 end
 
+require'lspconfig'.html.setup{}
+require('lspconfig')['eslint'].setup{}
 require('lspconfig')['pyright'].setup{
     flags = lsp_flags,
 }
@@ -69,7 +111,32 @@ require'lspconfig'.fortls.setup{
         '--enable_code_actions'
     },
 }
+
+vim.api.nvim_create_user_command(
+    'LuminaFormat',
+    function()
+        vim.api.nvim_command('silent write')
+        -- vim.api.nvim_command('silent write! backup-before-format.lm')
+        -- vim.cmd("silent !lumina fmt --file % > /tmp/formatfile-%.lm && mv /tmp/formatfile-%.lm %")
+        vim.cmd("silent !lumina fmt --file % --overwrite")
+        vim.cmd("e")
+    end,
+    {}
+)
 -- vim.lsp.omnifunc{}
+
+-- vim.api.nvim_create_augroup("AutoFormat", {})
+-- 
+-- vim.api.nvim_create_autocmf(
+--     "BufWritePost",
+--     {
+--         pattern = "*.lm",
+--         group = "AutoFormat",
+--         callback = function()
+--             vim.cmd("");
+--         end,
+--     }
+-- )
 
 -- Language Server Mappings
 local opts = { noremap=true, silent=true }
@@ -84,8 +151,8 @@ vim.keymap.set('n', 'zj', function()
 }) end, opts)
 vim.keymap.set('n', 'zd', function()
     vim.diagnostic.setqflist({
-    severity = { vim.diagnostic.severity.WARN, vim.diagnostic.severity.ERROR }
-    -- severity = { vim.diagnostic.severity.ERROR }
+    -- severity = { vim.diagnostic.severity.WARN, vim.diagnostic.severity.ERROR }
+    severity = { vim.diagnostic.severity.ERROR }
 }) end, opts)
 local bufopts = { noremap=true, silent=true, buffer=bufnr }
 vim.keymap.set('n', 'zg', vim.lsp.buf.definition, bufopts)
@@ -94,7 +161,7 @@ vim.keymap.set('n', 'za', vim.lsp.buf.code_action, bufopts)
 vim.keymap.set('n', 'zs', vim.lsp.buf.signature_help, bufopts)
 vim.keymap.set('n', 'zr', vim.lsp.buf.rename, bufopts)
 vim.keymap.set('n', 'zu', vim.lsp.buf.references, bufopts)
-vim.keymap.set('n', 'zf', function() vim.lsp.buf.format { async = true } end, bufopts)
+vim.keymap.set('n', 'zf', function() vim.cmd('LuminaFormat') end, bufopts)
 -- close quickfix menu after selecting choice
 vim.api.nvim_create_autocmd(
   "FileType", {

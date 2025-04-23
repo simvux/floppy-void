@@ -26,14 +26,19 @@ export GOPATH=/home/simon/code/go
 export NPM_PACKAGES="$HOME/.npm-packages"
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 export PATH=/home/simon/.cargo/bin:/opt/rocm/bin:/home/simon/.local/bin:$NPM_PACKAGES/bin:$GOPATH/bin:$PATH
+export work=/home/simon/work/home/simon/code/vizzit
+export vizzit=$work
 
 # Vim-Mode plugin cursor switching
-MODE_CURSOR_VIINS="#ff89ff blinking bar"
+# MODE_CURSOR_VIINS="#ff89ff blinking bar"
+MODE_CURSOR_VIINS="blinking bar"
 MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff0000"
 MODE_CURSOR_VICMD="green block"
-MODE_CURSOR_SEARCH="#ff89ff steady underline"
+# MODE_CURSOR_SEARCH="#ff89ff steady underline"
+MODE_CURSOR_SEARCH="steady underline"
 MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
-MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #ff89ff"
+# MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #ff89ff"
+MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL"
 KEYTIMEOUT=1
 
 # Less colors

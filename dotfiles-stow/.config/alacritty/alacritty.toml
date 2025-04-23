@@ -1,39 +1,10 @@
-[colors.bright]
-black = "#af9657"
-blue = "#96b9e6"
-cyan = "#e684eb"
-green = "#6f99c9"
-magenta = "#8cb1de"
-# red = "#93b3dc"
-red = "#ff0080"
-white = "#62b6b0"
-yellow = "#a3c1e7"
-
-[colors.cursor]
-cursor = "#ff89ff"
-text = "#000000"
-
-[colors.normal]
-black = "#b300b3"
-blue = "#8000ff"
-cyan = "#cc00cc"
-green = "#ff33ff"
-magenta = "#ff1aff"
-red = "#ff0080"
-white = "#ff4d44"
-yellow = "#ff89ff"
-
-[colors.primary]
-# background = "#0a0d11"
-background = "#0f1216"
-foreground = "#ffabff"
-
-[colors.selection]
-background = "#404040"
-text = "#eaeaea"
+[general]
+import = [
+    "cyan.toml",
+]
 
 [font]
-size = 12.0
+size = 11.0
 
 [font.bold]
 # family = "Source Code Pro"

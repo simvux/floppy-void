@@ -1,0 +1,4 @@
+#!/bin/env zsh
+pkill hyprpaper
+sleep 0.2s
+hyprpaper $@

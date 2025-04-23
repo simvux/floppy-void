@@ -34,6 +34,7 @@ require("lazy").setup({
         -- this is equivalent to setup({}) function
     },
     { 'neovim/nvim-lspconfig' },
+    { 'nvim-treesitter/nvim-treesitter' },
     { 'hrsh7th/nvim-cmp' }, -- Autocompletion plugin
     { 'hrsh7th/cmp-nvim-lsp' }, -- LSP source for nvim-cmp
     { 'L3MON4D3/LuaSnip' },
@@ -42,7 +43,7 @@ require("lazy").setup({
     { 'lambdalisue/suda.vim' },
     { 'elkowar/yuck.vim' },
     { 'rktjmp/lush.nvim',
-      { dir = '/home/simon/.config/nvim/lua/purple_theme' }
+      { dir = '/home/simon/.config/nvim/lua/lush-themes' }
     },
     { 'whatyouhide/vim-gotham' },
     {
@@ -54,7 +55,7 @@ require("lazy").setup({
 })
 
 -- Common options
-vim.cmd 'colorscheme purple_theme'
+vim.cmd 'colorscheme cyan_theme'
 vim.api.nvim_set_option('scrolloff', 10)
 vim.api.nvim_set_option('cmdheight', 0)
 vim.api.nvim_set_option('spelllang', 'en')
