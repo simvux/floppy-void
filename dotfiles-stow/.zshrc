@@ -26,6 +26,7 @@ export GOPATH=/home/simon/code/go
 export NPM_PACKAGES="$HOME/.npm-packages"
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 export PATH=/home/simon/.cargo/bin:/opt/rocm/bin:/home/simon/.local/bin:$NPM_PACKAGES/bin:$GOPATH/bin:$PATH
+export PATH=/home/simon/.local/share/gem/ruby/3.3.0/bin:$PATH
 export work=/home/simon/work/home/simon/code/vizzit
 export vizzit=$work
 

@@ -67,7 +67,7 @@ end
 local _ = load_lualine_by_name('cyan_theme');
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { "lua", "rust", "toml" },
+  ensure_installed = { "lua", "rust", "toml", "comment", "bash", "asm", "cmake", "cpp", "css", "csv", "c", "elixir", "elm", "fsharp", "fortran", "go", "haskell", "html", "hyprlang", "readline", "zig" },
   auto_install = true,
   highlight = {
     enable = true,
@@ -75,6 +75,7 @@ require('nvim-treesitter.configs').setup {
   },
   ident = { enable = true }, 
 }
+vim.api.nvim_set_hl(0, '@text.note', { link = 'Todo'})
 
 require('lspconfig')['rust_analyzer'].setup{
     flags = lsp_flags,
