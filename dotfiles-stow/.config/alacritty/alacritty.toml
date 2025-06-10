@@ -9,21 +9,25 @@ size = 11.0
 [font.bold]
 # family = "Source Code Pro"
 family = "Terminus"
+# family = "ohsnap"
 style = "Regular"
 
 [font.bold_italic]
 # family = "Source Code Pro"
 family = "Terminus"
+# family = "ohsnap"
 style = "Italic"
 
 [font.italic]
 # family = "Source Code Pro"
 family = "Terminus"
+# family = "ohsnap"
 style = "Italic"
 
 [font.normal]
 # family = "Source Code Pro"
 family = "Terminus"
+# family = "ohsnap"
 style = "Regular"
 
 [[keyboard.bindings]]
