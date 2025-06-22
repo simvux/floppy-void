@@ -64,7 +64,7 @@ function load_lualine_by_name(theme)
     end
 end
 
-local _ = load_lualine_by_name('cyan_theme');
+local _ = load_lualine_by_name('purple_theme');
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = { "lua", "rust", "toml", "comment", "bash", "asm", "cmake", "cpp", "css", "csv", "c", "elixir", "elm", "fsharp", "fortran", "go", "haskell", "html", "hyprlang", "readline", "zig" },
@@ -112,6 +112,10 @@ require'lspconfig'.fortls.setup{
         '--enable_code_actions'
     },
 }
+require'lspconfig'.lemminx.setup{
+    filetypes = { 'rvsdg', 'xml', 'xsd', 'xsl', 'xslt', 'svg' },
+}
+-- vim.lsp.enable('lemminx')
 
 vim.api.nvim_create_user_command(
     'LuminaFormat',

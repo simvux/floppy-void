@@ -33,6 +33,14 @@ require("lazy").setup({
         -- use opts = {} for passing setup options
         -- this is equivalent to setup({}) function
     },
+    {
+      "olimorris/codecompanion.nvim",
+      opts = {},
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+      },
+    },
     { 'neovim/nvim-lspconfig' },
     { 'nvim-treesitter/nvim-treesitter' },
     { 'hrsh7th/nvim-cmp' }, -- Autocompletion plugin
@@ -55,7 +63,7 @@ require("lazy").setup({
 })
 
 -- Common options
-vim.cmd 'colorscheme cyan_theme'
+vim.cmd 'colorscheme purple_theme'
 vim.api.nvim_set_option('scrolloff', 10)
 vim.api.nvim_set_option('cmdheight', 0)
 vim.api.nvim_set_option('spelllang', 'en')

@@ -60,6 +60,8 @@ local theme = lush(function(injected_functions)
     Special { fg = Normal.fg },
     ErrorMsg { fg = red },
     Function { fg = strong_2 },
+    NormalFloat { bg = hsl(222, 21, 14) },
+    FloatBorder = { fg = hsl(169, 60, 47) },
     DiagnosticError { fg = red }
   }
 end)

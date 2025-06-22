@@ -14,7 +14,7 @@ cursor = "#ff89ff"
 text = "#000000"
 
 [colors.normal]
-black = "#b300b3"
+black = "#2b192b" # Used for shell_gpt highlights
 blue = "#8000ff"
 cyan = "#cc00cc"
 green = "#ff33ff"
@@ -29,5 +29,5 @@ background = "#0f1216"
 foreground = "#ffabff"
 
 [colors.selection]
-background = "#404040"
+background = "#2b192b"
 text = "#eaeaea"
