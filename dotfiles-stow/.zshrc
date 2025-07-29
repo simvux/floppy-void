@@ -53,7 +53,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 function ask() {
     # (. ~/app/sgpt-env/bin/activate && sgpt --chat 'aliased-chat' $1)
-    /home/simon/app/sgpt-env/sgpt/dist/app --chat 'aliased-chat1' $1
+    /home/simon/app/sgpt-env/sgpt/dist/app --chat 'aliased-chat' $1
 }
 
 # Automatically ls after cd

@@ -64,7 +64,7 @@ function load_lualine_by_name(theme)
     end
 end
 
-local _ = load_lualine_by_name('purple_theme');
+local _ = load_lualine_by_name('cyan_theme');
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = { "lua", "rust", "toml", "comment", "bash", "asm", "cmake", "cpp", "css", "csv", "c", "elixir", "elm", "fsharp", "fortran", "go", "haskell", "html", "hyprlang", "readline", "zig" },
@@ -85,6 +85,73 @@ require('lspconfig')['rust_analyzer'].setup{
     }
 }
 
+-- Telescope
+require('telescope').setup{
+  defaults = {},
+  pickers = {
+    lsp_document_symbols = {
+      initial_mode = "normal",
+      theme = "dropdown",
+      layout_config = {
+          width = 0.6
+      }
+    },
+    diagnostics = {
+      initial_mode = "normal",
+      theme = "dropdown",
+      layout_config = {
+          width = 0.6
+      }
+    },
+    lsp_references = {
+      initial_mode = "normal",
+      theme = "dropdown",
+      layout_config = {
+          width = 0.6
+      }
+    },
+    find_files = {
+        initial_mode = "normal",
+        theme = "dropdown",
+        layout_config = {
+            width = 0.6
+        },
+        mappings = {
+            n = {
+                ["h"] = function(prompt_bufnr)
+                        local current_picker =
+                            require("telescope.actions.state").get_current_picker(prompt_bufnr)
+                        -- cwd is only set if passed as telescope option
+                        local cwd = current_picker.cwd and tostring(current_picker.cwd)
+                            or vim.loop.cwd()
+                        local parent_dir = vim.fs.dirname(cwd)
+
+                        require("telescope.actions").close(prompt_bufnr)
+                        require("telescope.builtin").find_files {
+                            prompt_title = vim.fs.basename(parent_dir),
+                            cwd = parent_dir,
+                        }
+                    end,
+                }
+           }
+      }
+  },
+  extensions = {}
+}
+local telescope = require('telescope.builtin')
+vim.keymap.set('n', 'zi', function () 
+    telescope.lsp_document_symbols(
+        { symbols = {'function', 'method', 'class', 'impl', 'struct', 'object'}
+        -- , ignore_symbols_sort = true
+        }
+    )
+end)
+vim.keymap.set('n', 'zf', telescope.find_files)
+vim.keymap.set('n', 'zu', telescope.lsp_references)
+vim.keymap.set('n', 'zd', function()
+    telescope.diagnostics({severity_limit = "ERROR", sort_by = "severity"})
+end)
+
 -- Hide semantic highlights for functions
 -- vim.api.nvim_set_hl(0, '@lsp.type.function', {})
 -- Hide all semantic highlights
@@ -100,7 +167,7 @@ require('lspconfig')['pyright'].setup{
 require'lspconfig'.gopls.setup{}
 require'lspconfig'.clangd.setup{}
 require'lspconfig'.luau_lsp.setup{}
-require'lspconfig'.elmls.setup{}
+vim.lsp.enable('elmls')
 require'lspconfig'.hls.setup{}
 require'lspconfig'.fortls.setup{
     cmd = {
@@ -154,19 +221,19 @@ vim.keymap.set('n', 'zj', function()
     vim.diagnostic.goto_next({
     float = false,
 }) end, opts)
-vim.keymap.set('n', 'zd', function()
-    vim.diagnostic.setqflist({
-    -- severity = { vim.diagnostic.severity.WARN, vim.diagnostic.severity.ERROR }
-    severity = { vim.diagnostic.severity.ERROR }
-}) end, opts)
+-- vim.keymap.set('n', 'zd', function()
+--     vim.diagnostic.setqflist({
+--     -- severity = { vim.diagnostic.severity.WARN, vim.diagnostic.severity.ERROR }
+--     severity = { vim.diagnostic.severity.ERROR }
+-- }) end, opts)
 local bufopts = { noremap=true, silent=true, buffer=bufnr }
 vim.keymap.set('n', 'zg', vim.lsp.buf.definition, bufopts)
 vim.keymap.set('n', 'zh', vim.lsp.buf.hover, bufopts)
 vim.keymap.set('n', 'za', vim.lsp.buf.code_action, bufopts)
 vim.keymap.set('n', 'zs', vim.lsp.buf.signature_help, bufopts)
 vim.keymap.set('n', 'zr', vim.lsp.buf.rename, bufopts)
-vim.keymap.set('n', 'zu', vim.lsp.buf.references, bufopts)
-vim.keymap.set('n', 'zf', function() vim.cmd('LuminaFormat') end, bufopts)
+-- vim.keymap.set('n', 'zu', vim.lsp.buf.references, bufopts)
+-- vim.keymap.set('n', 'zf', function() vim.cmd('LuminaFormat') end, bufopts)
 -- close quickfix menu after selecting choice
 vim.api.nvim_create_autocmd(
   "FileType", {

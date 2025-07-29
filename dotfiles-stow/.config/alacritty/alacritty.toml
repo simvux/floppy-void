@@ -1,6 +1,6 @@
 [general]
 import = [
-    "purple.toml",
+    "cyan.toml",
 ]
 
 [font]

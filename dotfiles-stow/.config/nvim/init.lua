@@ -30,8 +30,6 @@ require("lazy").setup({
         'windwp/nvim-autopairs',
         event = "InsertEnter",
         config = true
-        -- use opts = {} for passing setup options
-        -- this is equivalent to setup({}) function
     },
     {
       "olimorris/codecompanion.nvim",
@@ -41,10 +39,14 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
       },
     },
+    {
+      'nvim-telescope/telescope.nvim', tag = '0.1.8',
+      dependencies = { 'nvim-lua/plenary.nvim' }
+    },
     { 'neovim/nvim-lspconfig' },
     { 'nvim-treesitter/nvim-treesitter' },
-    { 'hrsh7th/nvim-cmp' }, -- Autocompletion plugin
-    { 'hrsh7th/cmp-nvim-lsp' }, -- LSP source for nvim-cmp
+    { 'hrsh7th/nvim-cmp' },
+    { 'hrsh7th/cmp-nvim-lsp' },
     { 'L3MON4D3/LuaSnip' },
     { 'saadparwaiz1/cmp_luasnip' },
     { 'is0n/fm-nvim' }, -- Ranger as file browser
@@ -58,12 +60,11 @@ require("lazy").setup({
         'nvim-lualine/lualine.nvim', -- Statusbar
         dependencies = { 'nvim-tree/nvim-web-devicons' }
     },
-    -- add your plugins here
   },
 })
 
 -- Common options
-vim.cmd 'colorscheme purple_theme'
+vim.cmd 'colorscheme cyan_theme'
 vim.api.nvim_set_option('scrolloff', 10)
 vim.api.nvim_set_option('cmdheight', 0)
 vim.api.nvim_set_option('spelllang', 'en')
